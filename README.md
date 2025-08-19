@@ -190,6 +190,7 @@ this to M:M by introducing a junction table (see suggestion below).
 -   **Fish_Catches ↔ Fish type:** **1:1** (as currently modeled)\
     Each catch has exactly one fish type row; each fish type row links
     to exactly one catch.
+<img width="916" height="875" alt="EER DIAGRAM" src="https://github.com/user-attachments/assets/2e1737e7-1e81-45fd-9ced-3cc9f168c794" />
 
-![](media/image1.png){width="6.5in" height="6.209027777777778in"}
+
 **

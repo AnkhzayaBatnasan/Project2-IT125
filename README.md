@@ -16,7 +16,7 @@ in a single, consistent system.
 The goal is to store all the information in one clean place instead of
 using messy spreadsheets. The database has seven main tables:
 **Members**, **Fishing_Trips**, **Fish_Catches**, **Events**,
-**Location** (Locations), **Attendance**, and **Fish type**.
+**Location** , **Attendance**, and **Fish type**.
 
 -   **Members** stores people in the club.
 
@@ -26,8 +26,7 @@ using messy spreadsheets. The database has seven main tables:
 
 -   **Events** stores club events like tournaments or meetings.
 
--   **Fish_Catches** links to trips and records what fish were caught
-    (who caught the fish can be added later if needed).
+-   **Fish_Catches** links to trips and records what fish were caught.
 
 I struggled with creating many-to-many and one-to-one sample data. I was
 not always sure how to connect the tables correctly. I figured out the
@@ -54,22 +53,10 @@ technology. Development and testing are done in **MySQL Workbench**.
 The database currently runs locally on my workstation using MySQL. Now
 you have all my data tables information.
 
-1.  Create the schema and tables (run the DDL script in MySQL Workbench
-    or the MySQL CLI).
-
-2.  Insert sample data (run the seed/INSERT script).
-
-3.  Use SELECT queries to verify foreign keys and relationships.
-
-4.  Build your EER diagram in MySQL Workbench and export it as PDF/PNG.
-
 **Task Completion: Tables, Attributes, Primary Keys, Foreign Keys, and
 Relationships**
 
 **1) Tables and Attributes (with PK/FK labels)**
-
-**Note:** Names match your current script. I've included brief notes and
-keys for each.
 
 **a) Members**
 
@@ -157,32 +144,31 @@ keys for each.
 
 -   WaterType (VARCHAR)
 
--   Fish typecol (VARCHAR) \<!\-- optional/free-form \--\>
+-   Fish typecol (VARCHAR) 
 
 -   **FK:** Fish_Catches_CatchID → Fish_Catches(CatchID)
 
 **2) Relationships (with cardinality)**
 
--   **Location → Fishing_Trips:** **1:M**\
+-   **Location → Fishing_Trips:** **1:M**
     One location can host many trips; each trip occurs at one location.
 
--   **Location → Events:** **1:M**\
+-   **Location → Events:** **1:M**
     One location can host many events; each event occurs at one
     location.
 
--   **Fishing_Trips → Fish_Catches:** **1:M**\
+-   **Fishing_Trips → Fish_Catches:** **1:M**
     One trip can have many catches; each catch belongs to one trip.
 
--   **Members ↔ Events (via Attendance):** **M:M**\
+-   **Members ↔ Events (via Attendance):** **M:M**
     A member can attend many events, and an event can include many
     members.
 
-    -   **Bridge/Junction:** Attendance(Members_MemberID,
+    -   **Bridge:** Attendance(Members_MemberID,
         Events_EventID)
 
--   **Fish_Catches ↔ Fish type:** **1:1** (as currently modeled)\
-    Each catch has exactly one fish type row; each fish type row links
-    to exactly one catch.
+-   **Fish_Catches ↔ Fish type:** **1:1** 
+    Each catch has exactly one fish type row; 
 <img width="916" height="875" alt="EER DIAGRAM" src="https://github.com/user-attachments/assets/2e1737e7-1e81-45fd-9ced-3cc9f168c794" />
 
 

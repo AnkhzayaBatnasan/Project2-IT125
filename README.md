@@ -129,9 +129,9 @@ keys for each.
 
 -   **PK:** CatchID (INT, NOT NULL, AUTO_INCREMENT)
 
--   Weight (VARCHAR, NOT NULL) \<!\-- can be numeric later \--\>
+-   Weight (VARCHAR, NOT NULL) 
 
--   Length (VARCHAR, NOT NULL) \<!\-- can be numeric later \--\>
+-   Length (VARCHAR, NOT NULL) 
 
 -   Released (TINYINT)
 
@@ -149,10 +149,6 @@ keys for each.
 
 -   **FK:** Events_EventID → Events(EventID)
 
-Tip: For strict M:M integrity, you can also enforce uniqueness on
-(Members_MemberID, Events_EventID) to avoid duplicate attendance rows
-for the same member/event pair.
-
 **g) Fish type (1:1 with Fish_Catches in your current design)**
 
 -   **PK:** TypeID (INT, NOT NULL, AUTO_INCREMENT)
@@ -164,9 +160,6 @@ for the same member/event pair.
 -   Fish typecol (VARCHAR) \<!\-- optional/free-form \--\>
 
 -   **FK:** Fish_Catches_CatchID → Fish_Catches(CatchID)
-
-If later you decide that a catch can include multiple species, convert
-this to M:M by introducing a junction table (see suggestion below).
 
 **2) Relationships (with cardinality)**
 

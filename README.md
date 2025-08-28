@@ -1,174 +1,146 @@
-****Fishing Club Database Design Project**
+Fishing Club Database Design Project
+Project Title
 
-**Project Title**
+Fishing Club Database Design Project
 
-**Fishing Club Database Design Project**
+Brief Description
 
-**Brief Description**
+This project creates a database for a fishing club to track members, trips, catches, events, and locations. The design focuses on clarity, data integrity, and easy reporting, so the club can manage information in a single, consistent system.
 
-This project creates a database for a fishing club to track members,
-trips, catches, events, and locations. The design focuses on clarity,
-data integrity, and easy reporting, so the club can manage information
-in a single, consistent system.
+Purpose of the Database
 
-**Purpose of the Database**
+The goal is to store all the information in one clean place instead of using messy spreadsheets. The database has seven main tables: Members, Fishing_Trips, Fish_Catches, Events, Location, Attendance, and Fish type.
 
-The goal is to store all the information in one clean place instead of
-using messy spreadsheets. The database has seven main tables:
-**Members**, **Fishing_Trips**, **Fish_Catches**, **Events**,
-**Location** , **Attendance**, and **Fish type**.
+Members stores people in the club.
 
--   **Members** stores people in the club.
+Location keeps addresses for events and trips.
 
--   **Location** keeps addresses for events and trips.
+Fishing_Trips records each fishing trip.
 
--   **Fishing_Trips** records each fishing trip.
+Events stores club events like tournaments or meetings.
 
--   **Events** stores club events like tournaments or meetings.
+Fish_Catches links to trips and records what fish were caught.
 
--   **Fish_Catches** links to trips and records what fish were caught.
+I struggled with creating many-to-many and one-to-one sample data. I was not always sure how to connect the tables correctly. I figured out the one-to-one tables and added a new table for fish types. I think the Fish type table could work as a one-to-one relationship with Fish_Catches. The overall structure looks good now, but I feel I still need more examples of many-to-many relationships. I also need to better understand which tables should use many-to-many relationships and how to connect them properly. Then I searched for many-to-many relationships to improve my understanding. After that, I connected the Members table to Attendance, then to Events. Because a member can be involved in many events and an event can include many members, Members ↔ Events is many-to-many. That is why I connected them using Attendance as a bridge (junction) table. Now I have a database with a clear many-to-many relationship.
 
-I struggled with creating many-to-many and one-to-one sample data. I was
-not always sure how to connect the tables correctly. I figured out the
-one-to-one tables and added a new table for fish types. I think the
-**Fish type** table could work as a one-to-one relationship with
-**Fish_Catches**. The overall structure looks good now, but I feel I
-still need more examples of many-to-many relationships. I also need to
-better understand which tables should use many-to-many relationships and
-how to connect them properly. Then I searched for many-to-many
-relationships to improve my understanding. After that, I connected the
-**Members** table to **Attendance**, then to **Events**. Because a
-member can be involved in many events and an event can include many
-members, **Members ↔ Events** is many-to-many. That is why I connected
-them using **Attendance** as a bridge (junction) table. Now I have a
-database with a clear many-to-many relationship.
+Technologies Used
 
-**Technologies Used**
+This project is designed with MySQL in mind as the target database technology. Development and testing are done in MySQL Workbench.
 
-This project is designed with **MySQL** in mind as the target database
-technology. Development and testing are done in **MySQL Workbench**.
+Instructions to Run SQL Scripts
 
-**Instructions to Run SQL Scripts**
+The database currently runs locally on my workstation using MySQL. All table creation and data insert scripts are included.
 
-The database currently runs locally on my workstation using MySQL. Now
-you have all my data tables information.
+Task Completion: Tables, Attributes, Primary Keys, Foreign Keys, and Relationships
+1) Tables and Attributes (with PK/FK labels)
 
-**Task Completion: Tables, Attributes, Primary Keys, Foreign Keys, and
-Relationships**
+a) Members
 
-**1) Tables and Attributes (with PK/FK labels)**
+PK: MemberID (INT, NOT NULL)
 
-**a) Members**
+FirstName (VARCHAR)
 
--   **PK:** MemberID (INT, NOT NULL)
+LastName (VARCHAR)
 
--   FirstName (VARCHAR)
+Phone (VARCHAR)
 
--   LastName (VARCHAR)
+Email (VARCHAR)
 
--   Phone (VARCHAR)
+JoinDate (DATE)
 
--   Email (VARCHAR)
+MemberType (TINYINT)
 
--   JoinDate (DATE)
+b) Location
 
--   MemberType (TINYINT)
+PK: LocationID (INT, NOT NULL)
 
-**b) Location**
+Name (VARCHAR)
 
--   **PK:** LocationID (INT, NOT NULL)
+Address (VARCHAR)
 
--   Name (VARCHAR)
+City (VARCHAR)
 
--   Address (VARCHAR)
+State (VARCHAR)
 
--   City (VARCHAR)
+Zipcode (VARCHAR)
 
--   State (VARCHAR)
+c) Fishing_Trips
 
--   Zipcode (VARCHAR)
+PK: TripID (INT, NOT NULL, AUTO_INCREMENT)
 
-**c) Fishing_Trips**
+TripDate (DATE, NOT NULL)
 
--   **PK:** TripID (INT, NOT NULL, AUTO_INCREMENT)
+TripTime (TIME, NOT NULL)
 
--   TripDate (DATE, NOT NULL)
+Trip_Type (TINYINT)
 
--   TripTime (TIME, NOT NULL)
+FK: Location_LocationID → Location(LocationID)
 
--   Trip_Type (TINYINT)
+d) Events
 
--   **FK:** Location_LocationID → Location(LocationID)
+PK: EventID (INT, NOT NULL, AUTO_INCREMENT)
 
-**d) Events**
+Name (VARCHAR)
 
--   **PK:** EventID (INT, NOT NULL, AUTO_INCREMENT)
+EventsDate (DATE)
 
--   Name (VARCHAR)
+Purpose (VARCHAR)
 
--   EventsDate (DATE)
+FK: Location_LocationID → Location(LocationID)
 
--   Purpose (VARCHAR)
+e) Fish_Catches
 
--   **FK:** Location_LocationID → Location(LocationID)
+PK: CatchID (INT, NOT NULL, AUTO_INCREMENT)
 
-**e) Fish_Catches**
+Weight (VARCHAR, NOT NULL)
 
--   **PK:** CatchID (INT, NOT NULL, AUTO_INCREMENT)
+Length (VARCHAR, NOT NULL)
 
--   Weight (VARCHAR, NOT NULL) 
+Released (TINYINT)
 
--   Length (VARCHAR, NOT NULL) 
+FK: Fishing_Trips_TripID → Fishing_Trips(TripID)
 
--   Released (TINYINT)
+f) Attendance (junction table for Members ↔ Events)
 
--   **FK:** Fishing_Trips_TripID → Fishing_Trips(TripID)
+PK: AttendanceID (INT, NOT NULL, AUTO_INCREMENT)
 
-**f) Attendance (junction table for Members ↔ Events)**
+Role (VARCHAR)
 
--   **PK:** AttendanceID (INT, NOT NULL, AUTO_INCREMENT)
+Type (VARCHAR)
 
--   Role (VARCHAR)
+FK: Members_MemberID → Members(MemberID)
 
--   Type (VARCHAR)
+FK: Events_EventID → Events(EventID)
 
--   **FK:** Members_MemberID → Members(MemberID)
+g) Fish type (1:1 with Fish_Catches in current design)
 
--   **FK:** Events_EventID → Events(EventID)
+PK: TypeID (INT, NOT NULL, AUTO_INCREMENT)
 
-**g) Fish type (1:1 with Fish_Catches in your current design)**
+SpeciesName (VARCHAR, NOT NULL)
 
--   **PK:** TypeID (INT, NOT NULL, AUTO_INCREMENT)
+WaterType (VARCHAR)
 
--   SpeciesName (VARCHAR, NOT NULL)
+Fish typecol (VARCHAR)
 
--   WaterType (VARCHAR)
+FK: Fish_Catches_CatchID → Fish_Catches(CatchID)
 
--   Fish typecol (VARCHAR) 
+2) Relationships 
 
--   **FK:** Fish_Catches_CatchID → Fish_Catches(CatchID)
+Location → Fishing_Trips: 1:M
+One location can host many trips; each trip occurs at one location.
 
-**2) Relationships (with cardinality)**
+Location → Events: 1:M
+One location can host many events; each event occurs at one location.
 
--   **Location → Fishing_Trips:** **1:M**
-    One location can host many trips; each trip occurs at one location.
+Fishing_Trips → Fish_Catches: 1:M
+One trip can have many catches; each catch belongs to one trip.
 
--   **Location → Events:** **1:M**
-    One location can host many events; each event occurs at one
-    location.
+Members ↔ Events (via Attendance): M:M
+A member can attend many events, and an event can include many members.
+Bridge: Attendance(Members_MemberID, Events_EventID)
 
--   **Fishing_Trips → Fish_Catches:** **1:M**
-    One trip can have many catches; each catch belongs to one trip.
-
--   **Members ↔ Events (via Attendance):** **M:M**
-    A member can attend many events, and an event can include many
-    members.
-
-    -   **Bridge:** Attendance(Members_MemberID,
-        Events_EventID)
-
--   **Fish_Catches ↔ Fish type:** **1:1** 
-    Each catch has exactly one fish type row; 
+Fish_Catches ↔ Fish type: 1:1
+Each catch has exactly one fish type row.
 <img width="916" height="875" alt="EER DIAGRAM" src="https://github.com/user-attachments/assets/2e1737e7-1e81-45fd-9ced-3cc9f168c794" />
 
 
